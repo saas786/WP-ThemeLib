@@ -3,4 +3,4 @@
 /**
  * Load all plugins
  */
-include(TEMPLATEPATH.'lib/plugins/load.php');
+require_once(TEMPLATEPATH.'/lib/plugins/load.php');

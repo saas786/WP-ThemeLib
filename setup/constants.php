@@ -56,4 +56,4 @@ function themelib_generate_theme_constants(){
 
 }
 
-add_action('init','themelib_generate_theme_constants');
+add_action('init','themelib_generate_theme_constants',1);

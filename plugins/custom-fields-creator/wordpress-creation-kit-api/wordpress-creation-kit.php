@@ -448,8 +448,8 @@ class WCK_CFC_Wordpress_Creation_Kit{
 				wp_enqueue_script( 'jquery-ui-draggable' );
 				wp_enqueue_script( 'jquery-ui-droppable' );
 				wp_enqueue_script( 'jquery-ui-sortable' );
-				wp_enqueue_script('wordpress-creation-kit', plugins_url('/wordpress-creation-kit.js', __FILE__), array('jquery') );
-				wp_register_style('wordpress-creation-kit-css', plugins_url('/wordpress-creation-kit.css', __FILE__));
+				wp_enqueue_script('wordpress-creation-kit', THEME_DIR . '/lib/plugins/custom-fields-creator/wordpress-creation-kit-api/wordpress-creation-kit.js', array('jquery') );
+				wp_register_style('wordpress-creation-kit-css', THEME_DIR . '/lib/plugins/custom-fields-creator/wordpress-creation-kit-api/wordpress-creation-kit.css');
 				wp_enqueue_style('wordpress-creation-kit-css');	
 			}
 		}
@@ -458,8 +458,8 @@ class WCK_CFC_Wordpress_Creation_Kit{
 				wp_enqueue_script( 'jquery-ui-draggable' );
 				wp_enqueue_script( 'jquery-ui-droppable' );
 				wp_enqueue_script( 'jquery-ui-sortable' );
-				wp_enqueue_script('wordpress-creation-kit', plugins_url('/wordpress-creation-kit.js', __FILE__), array('jquery', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
-				wp_register_style('wordpress-creation-kit-css', plugins_url('/wordpress-creation-kit.css', __FILE__));
+				wp_enqueue_script('wordpress-creation-kit', THEME_DIR . '/lib/plugins/custom-fields-creator/wordpress-creation-kit-api/wordpress-creation-kit-api/wordpress-creation-kit.js', array('jquery', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
+				wp_register_style('wordpress-creation-kit-css', THEME_DIR . '/lib/plugins/custom-fields-creator/wordpress-creation-kit-api/wordpress-creation-kit.css');
 				wp_enqueue_style('wordpress-creation-kit-css');	
 			}
 		}
