@@ -3,4 +3,9 @@
 /**
  * Load all plugins
  */
-require_once(TEMPLATEPATH.'/lib/plugins/load.php');
+include_once(TEMPLATEPATH.'/lib/plugins/load.php');
+
+/**
+ * Load analytics
+ */
+include_once(TEMPLATEPATH.'/analytics/presstrends.php');
