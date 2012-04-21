@@ -3,9 +3,9 @@
 /**
  * Load all plugins
  */
-include_once(TEMPLATEPATH.'/lib/plugins/load.php');
+include_once(dirname(__FILE__).'/plugins/load.php');
 
 /**
  * Load analytics
  */
-include_once(TEMPLATEPATH.'/analytics/presstrends.php');
+include_once(dirname(__FILE__).'/analytics/presstrends.php');
