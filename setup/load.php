@@ -3,14 +3,14 @@
 /**
  * Load Constants
  */
-include_once(dirname(__FILE__).'/constants.php');
+include_once(THEMELIB.'/setup/constants.php');
 
 /**
  * Load Dashboard Widget
  */
-include_once(dirname(__FILE__).'/dashboard.php');
+include_once(THEMELIB.'/setup/dashboard.php');
 
 /**
  * Load Theme Updater
  */
-include_once(dirname(__FILE__).'/theme-updater.php');
+include_once(THEMELIB.'/setup/theme-updater.php');
