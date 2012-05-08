@@ -34,8 +34,6 @@ class WordpressNivoSlider {
         
         load_plugin_textdomain( 'nivo-slider', false, dirname( plugin_basename( __FILE__ ) ) .'/lang/' );
 
-        include('plugin-updater.php');
-        new NivoPluginUpdater( 'http://updates.dev7studios.com/' );
 	}
     
     function init() {
