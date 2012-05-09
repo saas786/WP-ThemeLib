@@ -11,8 +11,15 @@ Author URI: http://gilbert.pellegrom.me
 $wordpress_nivo_slider = new WordpressNivoSlider();
 class WordpressNivoSlider {
 
-    var $plugin_folder = 'nivo-slider';
-    var $call_scripts = false;
+		var $call_scripts = false;
+
+		function get_plugin_folder() {
+			return get_template_directory_uri() . '/lib/plugins/nivo-slider';
+		}
+		
+		function get_plugin_directory() {
+			return get_template_directory() . '/lib/plugins/nivo-slider';
+		}
 
     function __construct() {	
         add_action('init', array(&$this, 'init'));
@@ -60,7 +67,7 @@ class WordpressNivoSlider {
                 'menu_position' => 100,
                 'exclude_from_search' => true,
                 'supports' => array('title'),
-                'menu_icon' => WP_PLUGIN_URL .'/'. $this->plugin_folder .'/images/favicon.png'
+                'menu_icon' => $this->get_plugin_folder() .'/images/favicon.png'
             )
         );
         
@@ -71,8 +78,8 @@ class WordpressNivoSlider {
         
         // Register scripts and styles
         wp_enqueue_script( 'jquery' );
-        wp_register_script( 'nivoslider', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/nivo-slider/jquery.nivo.slider.pack.js', array('jquery') );
-        wp_register_style( 'nivoslider', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/nivo-slider/nivo-slider.css' );
+        wp_register_script( 'nivoslider', $this->get_plugin_folder() .'/scripts/nivo-slider/jquery.nivo.slider.pack.js', array('jquery') );
+        wp_register_style( 'nivoslider', $this->get_plugin_folder() .'/scripts/nivo-slider/nivo-slider.css' );
         wp_enqueue_style( 'nivoslider' );
         $themes = $this->get_themes();
         foreach($themes as $theme){
@@ -150,7 +157,7 @@ class WordpressNivoSlider {
         global $post;
 
         if(isset($post->post_type) && $post->post_type == 'nivoslider'){
-            wp_enqueue_style( 'nivoslider-admin-css', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/styles/nivo-admin.css' );
+            wp_enqueue_style( 'nivoslider-admin-css', $this->get_plugin_folder() .'/styles/nivo-admin.css' );
         }
     }
     
@@ -158,11 +165,11 @@ class WordpressNivoSlider {
         global $post;
 
         if(isset($post->post_type) && $post->post_type == 'nivoslider'){
-            wp_register_script( 'nivo_plupload', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/plupload/plupload.full.js', array('jquery') );
+            wp_register_script( 'nivo_plupload', $this->get_plugin_folder() .'/scripts/plupload/plupload.full.js', array('jquery') );
             wp_enqueue_script( 'nivo_plupload' ); 
-            wp_register_script( 'jquery-simplemodal', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/jquery.simplemodal.1.4.1.min.js', array('jquery') );
+            wp_register_script( 'jquery-simplemodal', $this->get_plugin_folder() .'/scripts/jquery.simplemodal.1.4.1.min.js', array('jquery') );
             wp_enqueue_script( 'jquery-simplemodal' );
-            wp_register_script( 'nivoslider-admin-js', WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/nivo-admin.js', array('jquery') );
+            wp_register_script( 'nivoslider-admin-js', $this->get_plugin_folder() .'/scripts/nivo-admin.js', array('jquery') );
             wp_enqueue_script( 'nivoslider-admin-js' );
             wp_enqueue_script('jquery');
             wp_enqueue_script('jquery-ui-sortable');
@@ -459,8 +466,8 @@ class WordpressNivoSlider {
 				container: 'nivo-file-uploader',
 				max_file_size: '10mb',
 				url: ajaxurl +'?action=nivoslider_upload&post_id=<?php echo $post->ID; ?>&nonce=<?php echo wp_create_nonce('nivoslider_upload'); ?>',
-				flash_swf_url: '<?php echo WP_PLUGIN_URL .'/'. $this->plugin_folder; ?>/scripts/plupload/plupload.flash.swf',
-				silverlight_xap_url: '<?php echo WP_PLUGIN_URL .'/'. $this->plugin_folder; ?>/plupload/plupload.silverlight.xap',
+				flash_swf_url: '<?php echo $this->get_plugin_folder(); ?>/scripts/plupload/plupload.flash.swf',
+				silverlight_xap_url: '<?php echo $this->get_plugin_folder(); ?>/plupload/plupload.silverlight.xap',
 				filters: [
 					{ title:'Image files', extensions:'jpg,gif,png' }
 				]
@@ -1170,7 +1177,7 @@ class WordpressNivoSlider {
     }
 
     function mce_add_plugin( $plugin_array ) {
-        $plugin_array['nivoslider'] = WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/mce-nivoslider/nivoslider.js';
+        $plugin_array['nivoslider'] = $this->get_plugin_folder() .'/scripts/mce-nivoslider/nivoslider.js';
         return $plugin_array;
     }
     
@@ -1191,18 +1198,18 @@ class WordpressNivoSlider {
             'Author' => 'Author',
             'AuthorURI' => 'Author URI'
         );
-        $nivo_themes = glob(WP_PLUGIN_DIR .'/'. $this->plugin_folder .'/scripts/nivo-slider/themes/*', GLOB_ONLYDIR);
+        $nivo_themes = glob($this->get_plugin_directory() .'/scripts/nivo-slider/themes/*', GLOB_ONLYDIR);
         $themes = array();
         
         if($nivo_themes){
             foreach($nivo_themes as $theme_dir){
                 $theme_name = basename($theme_dir);
-                $theme_path = WP_PLUGIN_DIR .'/'. $this->plugin_folder .'/scripts/nivo-slider/themes/'. $theme_name .'/'. $theme_name .'.css';
+                $theme_path = $this->get_plugin_directory() .'/scripts/nivo-slider/themes/'. $theme_name .'/'. $theme_name .'.css';
                 if( file_exists($theme_path) ){
                     $themes[$theme_name] = array(
                         'theme_name' => $theme_name,
                         'theme_path' => $theme_path,
-                        'theme_url' => WP_PLUGIN_URL .'/'. $this->plugin_folder .'/scripts/nivo-slider/themes/'. $theme_name .'/'. $theme_name .'.css',
+                        'theme_url' => $this->get_plugin_folder() .'/scripts/nivo-slider/themes/'. $theme_name .'/'. $theme_name .'.css',
                         'theme_details' => get_file_data($theme_path, $nivo_theme_specs)
                     );
                 }

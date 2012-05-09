@@ -3,9 +3,17 @@
 /**
  * Load the WordPress Creation Kit
  */
-include_once(THEMELIB.'/plugins/custom-fields-creator/wck-cfc.php');
+if( !defined('DISABLE_WCK_CFC') )
+        include_once(TEMPLATEPATH.'/lib/plugins/custom-fields-creator/wck-cfc.php');
 
 /**
  * Load cpt Archives in nave menus
  */
-include_once(THEMELIB.'/plugins/cpt-archives-in-nav-menus.php');
+if( !defined('DISABLE_CPT_ARCHIVES') )
+        include_once(TEMPLATEPATH.'/lib/plugins/cpt-archives-in-nav-menus.php');
+
+/**
+ * Load Nivo Slider
+ */
+if( !defined('DISABLE_NIVO_SLIDER') )
+    include_once(TEMPLATEPATH.'/lib/plugins/nivo-slider/nivo-slider.php');
